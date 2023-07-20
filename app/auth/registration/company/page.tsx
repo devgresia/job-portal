@@ -17,6 +17,8 @@ const Registration = () => {
     city: "",
     region: "",
     postalCode: "",
+    panNo: "",
+    domainName: "",
   });
 
   const handleChange = (e: any) => {
@@ -93,6 +95,44 @@ const Registration = () => {
             </div>
             <div>
               <label
+                htmlFor="domainName"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Domain Name
+              </label>
+              <div className="mt-2">
+                <input
+                  id="domainName"
+                  name="domainName"
+                  type="text"
+                  placeholder="Domain Name"
+                  onChange={handleChange}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="panNo"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Pan No.
+              </label>
+              <div className="mt-2">
+                <input
+                  id="panNo"
+                  name="panNo"
+                  type="number"
+                  placeholder="Pan No..."
+                  onChange={handleChange}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div>
+              <label
                 htmlFor="email"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
@@ -159,7 +199,7 @@ const Registration = () => {
 
             <div>
               <label
-                htmlFor="text"
+                htmlFor="phone"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Phone
