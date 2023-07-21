@@ -14,8 +14,10 @@ import {
   Select,
   Checkbox,
   MultiSelect,
+  NativeSelect,
 } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
+import { FaSquarePlus, FaSquareMinus } from "react-icons/fa6";
 
 const CreateResume: NextPage = () => {
   // Mantine Stepper
@@ -34,10 +36,15 @@ const CreateResume: NextPage = () => {
     address: string;
     job_title: string;
     github: string;
-    linkedin: string;
+    linkedIn: string;
     facebook: string;
     portfolio: string;
     summary: string;
+    volunteerWorks: string;
+    interests: string;
+    accomplishments: string;
+    certifications: string;
+    references: string;
     language: object[];
     skills: string[];
     work_history: object[];
@@ -50,10 +57,15 @@ const CreateResume: NextPage = () => {
     address: "",
     job_title: "",
     github: "",
-    linkedin: "",
+    linkedIn: "",
     facebook: "",
     portfolio: "",
     summary: "",
+    volunteerWorks: "",
+    interests: "",
+    accomplishments: "",
+    certifications: "",
+    references: "",
     language: [],
     skills: [],
     work_history: [],
@@ -100,8 +112,8 @@ const CreateResume: NextPage = () => {
       employment_type: string;
       country: string;
       city: string;
-      from: Date;
-      to: Date;
+      from: string;
+      to: string;
       current: boolean;
       tech: Array<string>;
       desc: string;
@@ -114,8 +126,8 @@ const CreateResume: NextPage = () => {
       employment_type: "",
       country: "",
       city: "",
-      from: new Date(),
-      to: new Date(),
+      from: "",
+      to: "",
       current: false,
       tech: [],
       desc: "",
@@ -164,8 +176,8 @@ const CreateResume: NextPage = () => {
         employment_type: "",
         country: "",
         city: "",
-        from: new Date(),
-        to: new Date(),
+        from: "",
+        to: "",
         current: false,
         tech: [],
         desc: "",
@@ -193,8 +205,8 @@ const CreateResume: NextPage = () => {
       grade: string;
       country: string;
       city: string;
-      from: Date;
-      to: Date;
+      from: string;
+      to: string;
       desc: string;
     }>
   >([
@@ -205,8 +217,8 @@ const CreateResume: NextPage = () => {
       grade: "",
       country: "",
       city: "",
-      from: new Date(),
-      to: new Date(),
+      from: "",
+      to: "",
       desc: "",
     },
   ]);
@@ -221,8 +233,8 @@ const CreateResume: NextPage = () => {
         grade: "",
         country: "",
         city: "",
-        from: new Date(),
-        to: new Date(),
+        from: "",
+        to: "",
         desc: "",
       },
     ]);
@@ -241,6 +253,7 @@ const CreateResume: NextPage = () => {
       ...newFormData,
       work_history: workHistory,
       education: education,
+      language: language,
     });
     console.log(workHistory);
 
@@ -259,7 +272,7 @@ const CreateResume: NextPage = () => {
           <Button
             size={"xs"}
             component="a"
-            color={"violet"}
+            color={"#3b82f6"}
             variant={"outline"}
           >
             Go Back
@@ -271,7 +284,7 @@ const CreateResume: NextPage = () => {
             active={active}
             onStepClick={setActive}
             breakpoint="sm"
-            color={"violet"}
+            color={"#22c55e"}
           >
             {/* Personal Step */}
             <Stepper.Step
@@ -284,7 +297,6 @@ const CreateResume: NextPage = () => {
                   <TextInput
                     id="firstName"
                     label="First Name"
-                    placeholder="First name"
                     onChange={handlePersonal}
                     value={formData.firstName}
                     required
@@ -294,7 +306,6 @@ const CreateResume: NextPage = () => {
                   <TextInput
                     id="lastName"
                     label="Last Name"
-                    placeholder="Last name"
                     onChange={handlePersonal}
                     value={formData.lastName}
                     required
@@ -304,7 +315,6 @@ const CreateResume: NextPage = () => {
                   <TextInput
                     id="job_title"
                     label="Job Title"
-                    placeholder="Job Title"
                     onChange={handlePersonal}
                     value={formData.job_title}
                     required
@@ -314,7 +324,6 @@ const CreateResume: NextPage = () => {
                   <TextInput
                     id="email"
                     label="Email"
-                    placeholder="Your email"
                     onChange={handlePersonal}
                     value={formData.email}
                     required
@@ -324,7 +333,6 @@ const CreateResume: NextPage = () => {
                   <TextInput
                     id="contact"
                     label="Contact Number"
-                    placeholder="Contact"
                     onChange={handlePersonal}
                     value={formData.contact}
                     required
@@ -334,7 +342,6 @@ const CreateResume: NextPage = () => {
                   <TextInput
                     id="address"
                     label="Address"
-                    placeholder="Address"
                     onChange={handlePersonal}
                     value={formData.address}
                   />
@@ -348,17 +355,17 @@ const CreateResume: NextPage = () => {
               allowStepSelect={active > 2}
             >
               <Grid>
-                {/* <Grid.Col xs={4} sm={4}>
+                <Grid.Col xs={5} sm={5}>
                   <Select
                     name="languageName"
-                    value={language.languageName}
-                    onChange={(e: string) => {
-                      const newLanguage = [...language];
-                      newLanguage[index]["language"] = e;
-                      setWorkHistory(newLanguage);
-                    }}
+                    // value={language.languageName}
+                    // onChange={(e: string) => {
+                    //   const newLanguage = [...language];
+                    //   newLanguage[index]["language"] = e;
+                    //   setLanguage(newLanguage);
+                    // }}
                     label="Language"
-                    placeholder="Select Language"
+                    placeholder="Select"
                     data={[
                       { value: "English", label: "English" },
                       { value: "Nepali", label: "Nepali" },
@@ -368,33 +375,71 @@ const CreateResume: NextPage = () => {
                       { value: "Spanish", label: "Spanish" },
                     ]}
                   />
-                </Grid.Col> */}
-                {/* <Grid.Col xs={4} sm={4}>
-                      <Select
-                        name="employment_type"
-                        value={work.employment_type}
-                        onChange={(e: string) => {
-                          const newWorkHistory = [...workHistory];
-                          newWorkHistory[index]["employment_type"] = e;
-                          setWorkHistory(newWorkHistory);
-                        }}
-                        label="Employment Type"
-                        placeholder="Select employment type"
-                        data={[
-                          { value: "full-time", label: "Full-time" },
-                          { value: "part-time", label: "Part-time" },
-                          { value: "contract", label: "Contract" },
-                          { value: "freelance", label: "Freelance" },
-                          { value: "self-employed", label: "Self-employed" },
-                          { value: "internship", label: "Internship" },
-                        ]}
-                      />
-                    </Grid.Col> */}
+                </Grid.Col>
+                <Grid.Col xs={5} sm={5}>
+                  <Select
+                    name="proficiency"
+                    // value={language.languageName}
+                    // onChange={(e: string) => {
+                    //   const newLanguage = [...language];
+                    //   newLanguage[index]["language"] = e;
+                    //   setLanguage(newLanguage);
+                    // }}
+                    label="Proficiency Level"
+                    placeholder="Select"
+                    data={[
+                      { value: "Basic knowledge", label: "Basic knowledge" },
+                      {
+                        value: "Good/conversational",
+                        label: "Good/conversational",
+                      },
+                      { value: "Fluent", label: "Fluent" },
+                      { value: "Business fluent", label: "Business fluent" },
+                      { value: "Native language", label: "Native language" },
+                    ]}
+                  />
+                </Grid.Col>
+                <Grid.Col
+                  xs={1}
+                  sm={1}
+                  className="relative m-auto p-0 bottom-0 -left-0 flex"
+                  // style={{ paddingRight: "1 1 1 1" }}
+                >
+                  <FaSquarePlus
+                    color="#22c55e"
+                    fontSize={"2.4rem"}
+                    className="mt-6 ml-auto"
+                  />
+                </Grid.Col>
+                <Grid.Col xs={1} sm={1}>
+                  <FaSquareMinus
+                    color="red"
+                    fontSize={"2.4rem"}
+                    className="mt-6"
+                  />
+                </Grid.Col>
+                <Grid.Col xs={12} sm={12}>
+                  <TextInput
+                    id="interests"
+                    label="Interests"
+                    onChange={handlePersonal}
+                    value={formData.interests}
+                    required
+                  />
+                </Grid.Col>
+                <Grid.Col xs={12} sm={12}>
+                  <Textarea
+                    id="volunteerWorks"
+                    label="Volunteer Works"
+                    onChange={handleSummary}
+                    value={formData.volunteerWorks}
+                    required
+                  />
+                </Grid.Col>
                 <Grid.Col xs={12} sm={12}>
                   <Textarea
                     id="summary"
                     label="Summary"
-                    placeholder="Summary"
                     onChange={handleSummary}
                     value={formData.summary}
                     required
@@ -429,7 +474,6 @@ const CreateResume: NextPage = () => {
                           setWorkHistory(newWorkHistory);
                         }}
                         label="Company"
-                        placeholder="Company name"
                         // onChange={handleWorkHistory(index)}
                       />
                     </Grid.Col>
@@ -443,7 +487,6 @@ const CreateResume: NextPage = () => {
                           setWorkHistory(newWorkHistory);
                         }}
                         label="Job Title"
-                        placeholder="Job Title"
                       />
                     </Grid.Col>
                     <Grid.Col xs={12} sm={8}>
@@ -457,7 +500,6 @@ const CreateResume: NextPage = () => {
                           setWorkHistory(newWorkHistory);
                         }}
                         label="Company Website"
-                        placeholder="Company website"
                       />
                     </Grid.Col>
                     <Grid.Col xs={4} sm={4}>
@@ -470,7 +512,6 @@ const CreateResume: NextPage = () => {
                           setWorkHistory(newWorkHistory);
                         }}
                         label="Employment Type"
-                        placeholder="Select employment type"
                         data={[
                           { value: "full-time", label: "Full-time" },
                           { value: "part-time", label: "Part-time" },
@@ -491,7 +532,6 @@ const CreateResume: NextPage = () => {
                           setWorkHistory(newWorkHistory);
                         }}
                         label="Country"
-                        placeholder="Country"
                       />
                     </Grid.Col>
                     <Grid.Col xs={4} sm={6}>
@@ -504,51 +544,51 @@ const CreateResume: NextPage = () => {
                           setWorkHistory(newWorkHistory);
                         }}
                         label="City"
-                        placeholder="City"
                       />
                     </Grid.Col>
                     <Grid.Col xs={4} sm={6}>
-                      <DatePicker
-                        //@ts-ignore
+                      <TextInput
                         name="from"
                         id="from"
                         value={work.from}
-                        onChange={(e: Date) => {
+                        //@ts-ignore
+                        onChange={(e: string) => {
                           const newWorkHistory = [...workHistory];
                           newWorkHistory[index]["from"] = e;
                           setWorkHistory(newWorkHistory);
                         }}
-                        placeholder="Pick date"
+                        placeholder="YYYY-MM-DD"
                         label="From"
                       />
                     </Grid.Col>
                     <Grid.Col xs={4} sm={6}>
                       {work.current ? (
-                        <DatePicker
-                          //@ts-ignore
+                        <TextInput
                           name="to"
                           value={work.to}
                           disabled
-                          onChange={(e: Date) => {
+                          //@ts-ignore
+                          onChange={(e: string) => {
                             const newWorkHistory = [...workHistory];
                             newWorkHistory[index]["to"] = e;
                             setWorkHistory(newWorkHistory);
                           }}
-                          placeholder="Pick date"
+                          placeholder="YYYY-MM-DD"
                           label="To"
                         />
                       ) : (
-                        <DatePicker
+                        <TextInput
                           name="to"
                           //@ts-ignore
                           {...(work.current ? "disabled" : null)}
                           value={work.to}
-                          onChange={(e: Date) => {
+                          //@ts-ignore
+                          onChange={(e: string) => {
                             const newWorkHistory = [...workHistory];
                             newWorkHistory[index]["to"] = e;
                             setWorkHistory(newWorkHistory);
                           }}
-                          placeholder="Pick date"
+                          placeholder="YYYY-MM-DD"
                           label="To"
                         />
                       )}
@@ -601,7 +641,6 @@ const CreateResume: NextPage = () => {
                           setWorkHistory(newWorkHistory);
                         }}
                         label="Description"
-                        placeholder="Description"
                       />
                     </Grid.Col>
                     <Grid.Col>
@@ -629,7 +668,7 @@ const CreateResume: NextPage = () => {
               <Grid>
                 <Grid.Col xs={12} sm={12}>
                   <MultiSelect
-                    color={"violet"}
+                    color={"#3b82f6"}
                     searchable
                     nothingFound="Nothing found"
                     clearButtonLabel="Clear selection"
@@ -651,6 +690,30 @@ const CreateResume: NextPage = () => {
                     }}
                   />
                 </Grid.Col>
+                <Grid.Col xs={12} sm={12}>
+                  <Textarea
+                    id="accomplishments"
+                    label="Accomplishments"
+                    onChange={handleSummary}
+                    value={formData.accomplishments}
+                  />
+                </Grid.Col>
+                <Grid.Col xs={12} sm={12}>
+                  <Textarea
+                    id="certifications"
+                    label="Certifications"
+                    onChange={handleSummary}
+                    value={formData.certifications}
+                  />
+                </Grid.Col>
+                <Grid.Col xs={12} sm={12}>
+                  <Textarea
+                    id="references"
+                    label="References"
+                    onChange={handleSummary}
+                    value={formData.references}
+                  />
+                </Grid.Col>
               </Grid>
             </Stepper.Step>
             {/* Education Step */}
@@ -660,7 +723,7 @@ const CreateResume: NextPage = () => {
               allowStepSelect={active > 4}
             >
               <Button
-                color={"violet"}
+                color={"#3b82f6"}
                 size="xs"
                 variant="subtle"
                 onClick={addEducation}
@@ -674,7 +737,6 @@ const CreateResume: NextPage = () => {
                       <Grid.Col xs={8} sm={8}>
                         <TextInput
                           label="Institution"
-                          placeholder="Institution name"
                           value={edu.Institution}
                           onChange={(e) => {
                             const newEducation = [...education];
@@ -686,7 +748,7 @@ const CreateResume: NextPage = () => {
                       <Grid.Col xs={4} sm={4}>
                         <Select
                           label="Degree"
-                          placeholder="Select degree"
+                          placeholder="Select"
                           data={[
                             {
                               value: "associate-degree",
@@ -715,7 +777,6 @@ const CreateResume: NextPage = () => {
                       <Grid.Col xs={12} sm={8}>
                         <TextInput
                           label="Field of study"
-                          placeholder="Enter field of study"
                           value={edu.field_of_study}
                           onChange={(e) => {
                             const newEducation = [...education];
@@ -738,7 +799,6 @@ const CreateResume: NextPage = () => {
                       <Grid.Col xs={4} sm={6}>
                         <TextInput
                           label="Country"
-                          placeholder="Country"
                           value={edu.country}
                           onChange={(e) => {
                             const newEducation = [...education];
@@ -750,7 +810,6 @@ const CreateResume: NextPage = () => {
                       <Grid.Col xs={4} sm={6}>
                         <TextInput
                           label="City"
-                          placeholder="City"
                           value={edu.city}
                           onChange={(e) => {
                             const newEducation = [...education];
@@ -760,38 +819,35 @@ const CreateResume: NextPage = () => {
                         />
                       </Grid.Col>
                       <Grid.Col xs={4} sm={6}>
-                        <DatePicker
-                          //@ts-ignore
+                        <TextInput
                           name="from"
                           value={edu.from}
-                          onChange={(e: Date) => {
+                          //@ts-ignore
+                          onChange={(e: string) => {
                             const newEducation = [...education];
                             newEducation[index]["from"] = e;
                             setEducation(newEducation);
                           }}
-                          placeholder="Pick date"
+                          placeholder="YYYY-MM-DD"
                           label="From"
                         />
                       </Grid.Col>
                       <Grid.Col xs={4} sm={6}>
-                        <DatePicker
-                          //@ts-ignore
+                        <TextInput
                           name="to"
                           value={edu.to}
-                          onChange={(e: Date) => {
+                          //@ts-ignore
+                          onChange={(e: string) => {
                             const newEducation = [...education];
                             newEducation[index]["to"] = e;
                             setEducation(newEducation);
                           }}
-                          placeholder="Pick date"
+                          placeholder="YYYY-MM-DD"
                           label="To"
                         />
                       </Grid.Col>
                       <Grid.Col xs={12} sm={12}>
-                        <Textarea
-                          label="Description"
-                          placeholder="Description"
-                        />
+                        <Textarea label="Description" />
                       </Grid.Col>
                       <Grid.Col>
                         <Button
@@ -810,6 +866,50 @@ const CreateResume: NextPage = () => {
                 );
               })}
             </Stepper.Step>
+            {/* Social Step */}
+            <Stepper.Step
+              label="Social"
+              description={""}
+              allowStepSelect={active > 0}
+            >
+              <Grid>
+                <Grid.Col xs={6} sm={6}>
+                  <TextInput
+                    id="linkedIn"
+                    label="LinkedIn"
+                    onChange={handlePersonal}
+                    value={formData.linkedIn}
+                  />
+                </Grid.Col>
+                <Grid.Col xs={6} sm={6}>
+                  <TextInput
+                    id="github"
+                    label="GitHub"
+                    onChange={handlePersonal}
+                    value={formData.github}
+                    required
+                  />
+                </Grid.Col>
+                <Grid.Col xs={6} sm={6}>
+                  <TextInput
+                    id="portfolio"
+                    label="Portfolio Website"
+                    onChange={handlePersonal}
+                    value={formData.portfolio}
+                    required
+                  />
+                </Grid.Col>
+                <Grid.Col xs={6} sm={6}>
+                  <TextInput
+                    id="facebook"
+                    label="Facebook"
+                    onChange={handlePersonal}
+                    value={formData.facebook}
+                    required
+                  />
+                </Grid.Col>
+              </Grid>
+            </Stepper.Step>
             <Stepper.Completed>
               Completed, click back button to get to previous step
             </Stepper.Completed>
@@ -817,7 +917,7 @@ const CreateResume: NextPage = () => {
           <Group position="center" mt="xl">
             {active < 1 ? (
               <Button
-                color={"violet"}
+                color={"#3b82f6"}
                 variant={"outline"}
                 disabled
                 onClick={prevStep}
@@ -825,17 +925,17 @@ const CreateResume: NextPage = () => {
                 Back
               </Button>
             ) : (
-              <Button color={"violet"} variant={"outline"} onClick={prevStep}>
+              <Button color={"#3b82f6"} variant={"outline"} onClick={prevStep}>
                 Back
               </Button>
             )}
 
             {active >= 5 ? (
-              <Button color={"violet"} onClick={collectFormData}>
+              <Button color={"#3b82f6"} onClick={collectFormData}>
                 Complete
               </Button>
             ) : (
-              <Button color={"violet"} onClick={nextStep} variant={"outline"}>
+              <Button color={"#3b82f6"} onClick={nextStep} variant={"outline"}>
                 Next step
               </Button>
             )}
