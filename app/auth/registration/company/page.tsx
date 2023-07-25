@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Registration = () => {
   const [form, setForm] = useState({
@@ -17,6 +18,8 @@ const Registration = () => {
     city: "",
     region: "",
     postalCode: "",
+    panNo: "",
+    domainName: "",
   });
 
   const handleChange = (e: any) => {
@@ -36,13 +39,15 @@ const Registration = () => {
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
+          <Image
             className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            src="/glogo.png"
             alt="Your Company"
+            width={50}
+            height={50}
           />
           <h2 className="mt-10  mb-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Register your Company's account
+            Register your Company&#39;s account
           </h2>
         </div>
 
@@ -77,14 +82,49 @@ const Registration = () => {
                 htmlFor="text"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Company's Name
+                Company&#39;s Name
               </label>
               <div className="mt-2">
                 <input
                   id="companyName"
                   name="companyName"
                   type="text"
-                  placeholder="Company's Name"
+                  onChange={handleChange}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="domainName"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Domain Name
+              </label>
+              <div className="mt-2">
+                <input
+                  id="domainName"
+                  name="domainName"
+                  type="text"
+                  onChange={handleChange}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="panNo"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Pan No.
+              </label>
+              <div className="mt-2">
+                <input
+                  id="panNo"
+                  name="panNo"
+                  type="number"
                   onChange={handleChange}
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -104,7 +144,6 @@ const Registration = () => {
                   name="email"
                   type="email"
                   autoComplete="email"
-                  placeholder="email..."
                   onChange={handleChange}
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -126,7 +165,6 @@ const Registration = () => {
                   id="password"
                   name="password"
                   type="password"
-                  placeholder="password..."
                   onChange={handleChange}
                   autoComplete="current-password"
                   required
@@ -149,7 +187,6 @@ const Registration = () => {
                   id="confirmPassword"
                   name="confirmPassword"
                   type="password"
-                  placeholder="confirm password"
                   onChange={handleChange}
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -159,7 +196,7 @@ const Registration = () => {
 
             <div>
               <label
-                htmlFor="text"
+                htmlFor="phone"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Phone
@@ -172,7 +209,6 @@ const Registration = () => {
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   onChange={handleChange}
-                  placeholder="Phone"
                 />
               </div>
             </div>
@@ -182,18 +218,17 @@ const Registration = () => {
                 htmlFor="companyIndustryCategory"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Company's Industry Category
+                Company&#39;s Industry Category
               </label>
               <div className="mt-2">
                 <select
                   id="companyIndustryCategory"
                   name="companyIndustryCategory"
-                  autoComplete="companyIndustryCategory"
                   onChange={handleChange}
-                  placeholder="select the category"
+                  placeholder="select"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 >
-                  <option>Select the category</option>
+                  <option>Select</option>
                   <option>Electrical Engineering</option>
                   <option>Computer Engineering</option>
                   <option>Software Development</option>
@@ -207,18 +242,18 @@ const Registration = () => {
                 htmlFor="companySubIndustryCategory"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Company's Sub Industry Category
+                Company&#39;s Sub Industry Category
               </label>
               <div className="mt-2">
                 <select
                   id="companySubIndustryCategory"
                   name="companySubIndustryCategory"
                   autoComplete="companySubIndustryCategory"
-                  placeholder="select the sub category"
+                  placeholder="Select"
                   onChange={handleChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 >
-                  <option>Select the sub category</option>
+                  <option>Select</option>
                   <option>Web Development</option>
                   <option>AI & ML Engineer</option>
                   <option>Construction</option>
@@ -243,7 +278,7 @@ const Registration = () => {
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 >
-                  <option>Select Country</option>
+                  <option>Select</option>
                   <option>United States</option>
                   <option>Canada</option>
                   <option>Mexico</option>
@@ -265,7 +300,6 @@ const Registration = () => {
                   type="text"
                   name="streetAddress"
                   id="streetAddress"
-                  autoComplete="streetAddress"
                   onChange={handleChange}
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -304,7 +338,6 @@ const Registration = () => {
                   type="text"
                   name="region"
                   id="region"
-                  autoComplete="address-level1"
                   onChange={handleChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -324,7 +357,6 @@ const Registration = () => {
                   name="postalCode"
                   id="postalCode"
                   onChange={handleChange}
-                  autoComplete="postalCode"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
