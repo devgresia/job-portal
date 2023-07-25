@@ -18,7 +18,7 @@ function Navbar() {
       <Text size={"xl"}>
         <Text
           sx={{ fontWeight: "bold" }}
-          color={"violet"}
+          color={"#228BE6"}
           inherit
           component={"span"}
         >
@@ -27,9 +27,12 @@ function Navbar() {
         Resume Builder
       </Text>
       <Link href="/resumeBuilder/createResume" passHref>
-        <Button component="a" color={"violet"} variant={"outline"}>
+        <button
+          color="#228BE6"
+          className="flex spa justify-center rounded-md bg-blue-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500"
+        >
           Create Resume
-        </Button>
+        </button>
       </Link>
     </Box>
   );

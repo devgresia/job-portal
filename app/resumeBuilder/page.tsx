@@ -19,14 +19,14 @@ const Home: NextPage = () => {
         <Center sx={{ padding: "6rem 0" }}>
           <Box>
             <Title align={"center"} order={1} mb={8}>
-              <Text color={"violet"} inherit component={"span"}>
+              <Text color={"#228BE6"} component={"span"}>
                 Build{" "}
               </Text>{" "}
               and{" "}
-              <Text color={"violet"} inherit component={"span"}>
+              <Text color={"#228BE6"} inherit component={"span"}>
                 optimize{" "}
               </Text>{" "}
-              your resume
+              your Resume
             </Title>
             <Text align={"center"} mb={32}>
               Completely free to use, create and download Clean ATS-friendly
@@ -35,24 +35,29 @@ const Home: NextPage = () => {
             <Box
               style={{
                 position: "relative",
-                height: "60vh",
+                // height: "60vh",
                 width: "100%",
-                boxShadow: "rgba(0, 0, 0, 0.15) 0px 5px 5px",
+                // boxShadow: "rgba(0, 0, 0, 0.15) 0px 5px 5px",
               }}
             >
               <Image
-                src="/hero.webp"
-                alt={"hero"}
-                layout={"fill"}
-                objectFit={"contain"}
+                src="/resumeBuilder.png"
+                alt={"resumeBuilder"}
+                // layout={"fill"}
+                // objectFit={"contain"}
+                height={1000}
+                width={1000}
                 priority
               />
             </Box>
-            <Center mt={16}>
+            <Center mt={26}>
               <Link href="/resumeBuilder/createResume" passHref>
-                <Button component="a" color={"violet"} variant={"outline"}>
+                <button
+                  color="#228BE6"
+                  className="flex spa justify-center rounded-md bg-blue-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500"
+                >
                   Create Resume
-                </Button>
+                </button>
               </Link>
             </Center>
           </Box>

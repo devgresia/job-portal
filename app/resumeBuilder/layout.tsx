@@ -26,8 +26,6 @@ function Page({ children }: PageProps) {
       </Head>
       <body>
         <main>
-          {/* @ts-ignore */}
-
           <Container mt={64}>{children}</Container>
         </main>
       </body>
