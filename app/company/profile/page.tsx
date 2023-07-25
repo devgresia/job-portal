@@ -1,38 +1,38 @@
-
-"use client"
-import { useState, Suspense } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid';
-import ImageUpload from './_components/ImageUpload';
+"use client";
+import { useState, Suspense } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
+import ImageUpload from "./_components/ImageUpload";
 
 export default function Profile() {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
-    username: '',
-    about: '',
-    firstName: '',
-    email: '',
-    streetAddress: '',
-    country: ''
+    username: "",
+    about: "",
+    firstName: "",
+    email: "",
+    streetAddress: "",
+    country: "",
+    website: "",
   });
 
   const [isFileUploadOpen, setIsFileUploadOpen] = useState(false);
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
 
     // Check if any required field is empty
     if (!form.username || !form.email || !form.firstName) {
-      toast.error('Please fill in all the required fields');
+      toast.error("Please fill in all the required fields");
       return;
     }
 
     // Display success notification
-    toast.success('Profile updated successfully');
+    toast.success("Profile updated successfully");
   };
 
-  const handleChange = (e:any) => {
+  const handleChange = (e: any) => {
     setForm((prevForm) => ({
       ...prevForm,
       [e.target.name]: e.target.value,
@@ -58,20 +58,30 @@ export default function Profile() {
     <form onSubmit={handleSubmit}>
       <div className="mx-10 space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
-          <h1 className="text-base font-semibold leading-7 text-gray-900 mt-5">Company Profile</h1>
-          <h2 className="text-base font-semibold leading-7 text-gray-900">Profile</h2>
+          <h1 className="text-base font-semibold leading-7 text-gray-900 mt-5">
+            Company Profile
+          </h1>
+          <h2 className="text-base font-semibold leading-7 text-gray-900">
+            Profile
+          </h2>
           <p className="mt-1 text-sm leading-6 text-gray-600">
-            This information will be displayed publicly so be careful what you share.
+            This information will be displayed publicly so be careful what you
+            share.
           </p>
 
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div className="mt-10  grid grid-cols-4 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-4">
-              <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="username"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 Company Name
               </label>
               <div className="mt-2">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                  <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm">gresia.com/</span>
+                  <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm">
+                    gresia.com/
+                  </span>
                   <input
                     type="text"
                     name="username"
@@ -86,8 +96,36 @@ export default function Profile() {
               </div>
             </div>
 
+            {/* company website */}
+            <div className="sm:col-span-4">
+              <label
+                htmlFor="website"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Company Website
+              </label>
+              <div className="mt-2">
+                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                  <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"></span>
+                  <input
+                    type="text"
+                    name="website"
+                    id="website"
+                    autoComplete="website"
+                    className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                    placeholder="eg : www.gresianepal.com"
+                    value={form.website}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+            </div>
+
             <div className="col-span-full">
-              <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="about"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 About Company
               </label>
               <div className="mt-2">
@@ -100,7 +138,9 @@ export default function Profile() {
                   onChange={handleChange}
                 />
               </div>
-              <p className="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about yourself.</p>
+              <p className="mt-3 text-sm leading-6 text-gray-600">
+                Write a few sentences about yourself.
+              </p>
             </div>
 
             {/* <div className="col-span-full">
@@ -115,11 +155,14 @@ export default function Profile() {
             </div> */}
 
             <div className="col-span-full">
-              <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="cover-photo"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 Cover photo
               </label>
 
-                    <ImageUpload/>
+              <ImageUpload />
               {/* <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                 <div className="text-center">
                   <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
@@ -141,11 +184,12 @@ export default function Profile() {
         </div>
 
         <div className="border-b border-gray-900/10 pb-12">
-          
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-    
             <div className="sm:col-span-4">
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 Email address
               </label>
               <div className="mt-2">
@@ -162,7 +206,10 @@ export default function Profile() {
             </div>
 
             <div className="sm:col-span-3">
-              <label htmlFor="country" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="country"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 Country
               </label>
               <div className="mt-2">
@@ -180,7 +227,10 @@ export default function Profile() {
             </div>
 
             <div className="col-span-full">
-              <label htmlFor="streetAddress" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="streetAddress"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 Street address
               </label>
               <div className="mt-2">
@@ -197,7 +247,10 @@ export default function Profile() {
             </div>
 
             <div className="sm:col-span-2 sm:col-start-1">
-              <label htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="city"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 City
               </label>
               <div className="mt-2">
@@ -212,7 +265,10 @@ export default function Profile() {
             </div>
 
             <div className="sm:col-span-2">
-              <label htmlFor="region" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="region"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 State / Province
               </label>
               <div className="mt-2">
@@ -227,7 +283,10 @@ export default function Profile() {
             </div>
 
             <div className="sm:col-span-2">
-              <label htmlFor="postal-code" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="postal-code"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 ZIP / Postal code
               </label>
               <div className="mt-2">
@@ -245,7 +304,10 @@ export default function Profile() {
       </div>
 
       <div className="mt-6 flex items-center justify-end gap-x-6">
-        <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
+        <button
+          type="button"
+          className="text-sm font-semibold leading-6 text-gray-900"
+        >
           Cancel
         </button>
         <button
